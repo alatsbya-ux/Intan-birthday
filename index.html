@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For You, Intan ♡</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top, #26384a 0%, #101820 45%, #080d12 100%);
+
+            font-family: Georgia, "Times New Roman", serif;
+            color: #e8d19a;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 430px;
+            padding: 45px 30px;
+
+            text-align: center;
+
+            border: 1px solid rgba(218, 181, 104, 0.45);
+            border-radius: 18px;
+
+            background: rgba(8, 13, 18, 0.72);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.45),
+                inset 0 0 30px rgba(218, 181, 104, 0.03);
+
+            backdrop-filter: blur(10px);
+        }
+
+        .heart {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 29px;
+            font-weight: normal;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            margin-top: 14px;
+            margin-bottom: 35px;
+
+            font-size: 15px;
+            line-height: 1.7;
+
+            color: #d7c9a6;
+            font-style: italic;
+        }
+
+        .password-box {
+            width: 100%;
+            padding: 14px 16px;
+
+            border: 1px solid rgba(218, 181, 104, 0.5);
+            border-radius: 8px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            color: white;
+            text-align: center;
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .password-box:focus {
+            border-color: #d8b568;
+        }
+
+        .unlock-button {
+            margin-top: 18px;
+
+            width: 100%;
+            padding: 14px;
+
+            border: 1px solid #d8b568;
+            border-radius: 8px;
+
+            background: transparent;
+            color: #e8d19a;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .unlock-button:hover {
+            background: #d8b568;
+            color: #101820;
+        }
+
+        .error {
+            margin-top: 15px;
+            color: #d99b9b;
+            font-size: 13px;
+            display: none;
+        }
+
+        #secret {
+            display: none;
+        }
+
+        .divider {
+            width: 70px;
+            height: 1px;
+
+            margin: 25px auto;
+
+            background: #d8b568;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e5dcc6;
+            font-style: italic;
+        }
+
+        .song-title {
+            margin-top: 28px;
+            font-size: 17px;
+            color: #e8d19a;
+        }
+
+        .song-description {
+            margin-top: 8px;
+            margin-bottom: 20px;
+
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #9f947d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- PASSWORD PAGE -->
+        <div id="lockScreen">
+
+            <div class="heart">♡</div>
+
+            <h1>For You, Intan</h1>
+
+            <div class="subtitle">
+                A little something<br>
+                I made especially for you.
+            </div>
+
+            <input
+                type="password"
+                id="password"
+                class="password-box"
+                placeholder="Enter the password"
+            >
+
+            <button
+                class="unlock-button"
+                onclick="unlock()"
+            >
+                UNLOCK ♡
+            </button>
+
+            <div id="error" class="error">
+                That's not the right password ♡
+            </div>
+
+        </div>
+
+
+        <!-- SECRET PAGE -->
+        <div id="secret">
+
+            <div class="heart">♡</div>
+
+            <h1>For You</h1>
+
+            <div class="divider"></div>
+
+            <div class="message">
+                I found happiness in having you.
+                <br>
+                May happiness always find you, too.
+            </div>
+
+            <div class="song-title">
+                ♫ Run To You
+            </div>
+
+            <div class="song-description">
+                A little message from my heart.
+            </div>
+
+            <audio id="music" controls>
+                <source src="Intan-Birthday.mp3" type="audio/mpeg">
+                Your browser does not support audio.
+            </audio>
+
+            <div class="footer">
+                Made with love ♡
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function unlock() {
+
+            const password =
+                document.getElementById("password").value;
+
+            const correctPassword = "01092000";
+
+            const lockScreen =
+                document.getElementById("lockScreen");
+
+            const secret =
+                document.getElementById("secret");
+
+            const error =
+                document.getElementById("error");
+
+            const music =
+                document.getElementById("music");
+
+
+            if (password === correctPassword) {
+
+                lockScreen.style.display = "none";
+
+                secret.style.display = "block";
+
+                music.play().catch(function() {
+                    console.log(
+                        "Browser meminta pengguna menekan tombol play."
+                    );
+                });
+
+            } else {
+
+                error.style.display = "block";
+
+            }
+
+        }
+
+
+        document
+            .getElementById("password")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+                    unlock();
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>
